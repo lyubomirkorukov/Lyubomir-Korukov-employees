@@ -1,0 +1,11 @@
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\bin\Debug\LongestPeriodWithUI.exe.config
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\bin\Debug\LongestPeriodWithUI.exe
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\bin\Debug\LongestPeriodWithUI.pdb
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\obj\Debug\LongestPeriodWithUI.csprojResolveAssemblyReference.cache
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\obj\Debug\LongestPeriodWithUI.Form1.resources
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\obj\Debug\LongestPeriodWithUI.Properties.Resources.resources
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\obj\Debug\LongestPeriodWithUI.csproj.GenerateResource.Cache
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\obj\Debug\LongestPeriodWithUI.exe
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\obj\Debug\LongestPeriodWithUI.pdb
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\bin\Debug\LongestPeriod.exe
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriodWithUI\bin\Debug\LongestPeriod.pdb

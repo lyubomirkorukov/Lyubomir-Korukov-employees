@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LongestPeriod
+namespace LongestPeriodWithUI
 {
-    public class Program
+    public static class LongestPeriod
     {
-        static void Main(string[] args)
-        {            
+        public static int ProjectID { get; set; }
+        public static int FirstEmpID { get; set; }
+        public static int SecondEmpID { get; set; }
+        public static int MaxDays { get; set; }
+
+        public static void FindEmployeesThatHaveWorkedTheLongestTogether(string filePath)
+        {
             Dictionary<int, Dictionary<int, List<DateTime[]>>> employeesWorkInfo = new Dictionary<int, Dictionary<int, List<DateTime[]>>>();
             Dictionary<int, List<DateTime[]>> employeesAndTheirWorkDates = new Dictionary<int, List<DateTime[]>>();
 
-            StreamReader streamReader = new StreamReader("../../textDocument.txt");
+            StreamReader streamReader = new StreamReader(filePath);
             using (streamReader)
             {
                 string line = streamReader.ReadLine();
@@ -31,7 +37,7 @@ namespace LongestPeriod
                 dates.Add(new DateTime[] { dateFrom, dateTo });
                 employeesAndTheirWorkDates.Add(empID, dates);
                 employeesWorkInfo.Add(projectID, employeesAndTheirWorkDates);
-                
+
                 while (true)
                 {
                     line = streamReader.ReadLine();
@@ -92,7 +98,7 @@ namespace LongestPeriod
                             for (int n = 0; n < currentProjectEmployeesWorkInfo.ElementAt(k).Value.Count; n++)
                             {
                                 if ((currentProjectEmployeesWorkInfo.ElementAt(j).Value.ElementAt(m)[0] >=
-                                    currentProjectEmployeesWorkInfo.ElementAt(k).Value.ElementAt(n)[0]) && 
+                                    currentProjectEmployeesWorkInfo.ElementAt(k).Value.ElementAt(n)[0]) &&
                                     (currentProjectEmployeesWorkInfo.ElementAt(j).Value.ElementAt(m)[1] <=
                                     currentProjectEmployeesWorkInfo.ElementAt(k).Value.ElementAt(n)[1]))
                                 {
@@ -105,7 +111,7 @@ namespace LongestPeriod
                                 {
                                     daysWorkedTogether += (currentProjectEmployeesWorkInfo.ElementAt(k).Value.ElementAt(n)[1] - currentProjectEmployeesWorkInfo.ElementAt(k).Value.ElementAt(n)[0]).Days + 1;
                                 }
-                                else if ((currentProjectEmployeesWorkInfo.ElementAt(j).Value.ElementAt(m)[1] >= 
+                                else if ((currentProjectEmployeesWorkInfo.ElementAt(j).Value.ElementAt(m)[1] >=
                                     currentProjectEmployeesWorkInfo.ElementAt(k).Value.ElementAt(n)[0]) &&
                                     (currentProjectEmployeesWorkInfo.ElementAt(j).Value.ElementAt(m)[0] <=
                                     currentProjectEmployeesWorkInfo.ElementAt(k).Value.ElementAt(n)[0]))
@@ -128,13 +134,15 @@ namespace LongestPeriod
                             firstEmployeeID = currentProjectEmployeesWorkInfo.ElementAt(j).Key;
                             secondEmployeeID = currentProjectEmployeesWorkInfo.ElementAt(k).Key;
                             projectIDOnWhichTheTwoEmployeesHaveWorkedOnTheMost = employeesWorkInfo.ElementAt(i).Key;
+
+                            MaxDays = maxDaysTwoEmployeesHaveWorkedOnTheSameProject;
+                            FirstEmpID = firstEmployeeID;
+                            SecondEmpID = secondEmployeeID;
+                            ProjectID = projectIDOnWhichTheTwoEmployeesHaveWorkedOnTheMost;
                         }
                     }
                 }
             }
-
-            Console.WriteLine(String.Format("EmployeeID #1: {0}, EmployeeID #2: {1}, Days: {2}", firstEmployeeID, secondEmployeeID, maxDaysTwoEmployeesHaveWorkedOnTheSameProject));
-            Console.WriteLine("Project ID: " + projectIDOnWhichTheTwoEmployeesHaveWorkedOnTheMost);
         }
     }
 }
