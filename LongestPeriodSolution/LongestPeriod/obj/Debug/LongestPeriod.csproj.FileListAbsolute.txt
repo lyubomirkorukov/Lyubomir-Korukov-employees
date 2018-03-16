@@ -1,0 +1,12 @@
+C:\Users\Lyubomir\Desktop\LongestPeriodSolution\LongestPeriod\bin\Debug\LongestPeriod.exe.config
+C:\Users\Lyubomir\Desktop\LongestPeriodSolution\LongestPeriod\bin\Debug\LongestPeriod.exe
+C:\Users\Lyubomir\Desktop\LongestPeriodSolution\LongestPeriod\bin\Debug\LongestPeriod.pdb
+C:\Users\Lyubomir\Desktop\LongestPeriodSolution\LongestPeriod\obj\Debug\LongestPeriod.csprojResolveAssemblyReference.cache
+C:\Users\Lyubomir\Desktop\LongestPeriodSolution\LongestPeriod\obj\Debug\LongestPeriod.exe
+C:\Users\Lyubomir\Desktop\LongestPeriodSolution\LongestPeriod\obj\Debug\LongestPeriod.pdb
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriod\bin\Debug\LongestPeriod.exe.config
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriod\obj\Debug\LongestPeriod.exe
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriod\obj\Debug\LongestPeriod.pdb
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriod\bin\Debug\LongestPeriod.exe
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriod\bin\Debug\LongestPeriod.pdb
+D:\New folder\Lyubomir-Korukov-employees\LongestPeriodSolution\LongestPeriod\obj\Debug\LongestPeriod.csprojResolveAssemblyReference.cache
