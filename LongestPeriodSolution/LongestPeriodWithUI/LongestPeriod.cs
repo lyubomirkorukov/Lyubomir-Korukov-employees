@@ -13,11 +13,16 @@ namespace LongestPeriodWithUI
         public static int FirstEmpID { get; set; }
         public static int SecondEmpID { get; set; }
         public static int MaxDays { get; set; }
+        public static int EmployeesPairWhoWorkedTheMostTogetherIndex { get; set; }
+        public static Dictionary<int[], HashSet<int>> EmployeesPairsAndProjectIds = new Dictionary<int[], HashSet<int>>();
 
         public static void FindEmployeesThatHaveWorkedTheLongestTogether(string filePath)
         {
             Dictionary<int, Dictionary<int, List<DateTime[]>>> employeesWorkInfo = new Dictionary<int, Dictionary<int, List<DateTime[]>>>();
             Dictionary<int, List<DateTime[]>> employeesAndTheirWorkDates = new Dictionary<int, List<DateTime[]>>();
+
+            List<int[]> employeesPairsWorkdays = new List<int[]>();
+            SortedSet<int> employeeIds = new SortedSet<int>();
 
             StreamReader streamReader = new StreamReader(filePath);
             using (streamReader)
@@ -28,6 +33,7 @@ namespace LongestPeriodWithUI
                 int projectID = int.Parse(arguments[1]);
                 DateTime dateFrom = DateTime.Parse(arguments[2]);
                 DateTime dateTo = DateTime.Today;
+                employeeIds.Add(empID);
                 if (arguments[3].TrimEnd() != "NULL")
                 {
                     dateTo = DateTime.Parse(arguments[3]);
@@ -41,7 +47,7 @@ namespace LongestPeriodWithUI
                 while (true)
                 {
                     line = streamReader.ReadLine();
-                    if (line == null)
+                    if (String.IsNullOrEmpty(line))
                     {
                         break;
                     }
@@ -51,6 +57,7 @@ namespace LongestPeriodWithUI
                     projectID = int.Parse(arguments[1]);
                     dateFrom = DateTime.Parse(arguments[2]);
                     dateTo = DateTime.Today;
+                    employeeIds.Add(empID);
                     if (arguments[3].TrimEnd() != "NULL")
                     {
                         dateTo = DateTime.Parse(arguments[3]);
@@ -80,7 +87,19 @@ namespace LongestPeriodWithUI
                 }
             }
 
-            int projectIDOnWhichTheTwoEmployeesHaveWorkedOnTheMost = 0;
+            for (int i = 0; i < employeeIds.Count - 1; i++)
+            {
+                for (int j = i + 1; j < employeeIds.Count; j++)
+                {
+                    int[] arrayOfEmployeeIdsAndWorkdays = new int[3];
+                    arrayOfEmployeeIdsAndWorkdays[0] = employeeIds.ElementAt(i);
+                    arrayOfEmployeeIdsAndWorkdays[1] = employeeIds.ElementAt(j);
+                    arrayOfEmployeeIdsAndWorkdays[2] = 0;
+                    employeesPairsWorkdays.Add(arrayOfEmployeeIdsAndWorkdays);
+                    EmployeesPairsAndProjectIds.Add(arrayOfEmployeeIdsAndWorkdays, new HashSet<int>());
+                }
+            }
+            
             int firstEmployeeID = 0;
             int secondEmployeeID = 0;
             int maxDaysTwoEmployeesHaveWorkedOnTheSameProject = 0;
@@ -128,17 +147,43 @@ namespace LongestPeriodWithUI
                             }
                         }
 
-                        if (daysWorkedTogether > maxDaysTwoEmployeesHaveWorkedOnTheSameProject)
+                        int firstEmpId = currentProjectEmployeesWorkInfo.ElementAt(j).Key;
+                        int secondEmpId = currentProjectEmployeesWorkInfo.ElementAt(k).Key;
+                        int smallerEmpId = firstEmpId < secondEmpId ? firstEmpId : secondEmpId;
+                        int biggerEmpId = firstEmpId > secondEmpId ? firstEmpId : secondEmpId;
+                        int currentPairIndex = 0;
+
+                        for (int t = 0; t < employeesPairsWorkdays.Count; t++)
                         {
-                            maxDaysTwoEmployeesHaveWorkedOnTheSameProject = daysWorkedTogether;
+                            if (employeesPairsWorkdays.ElementAt(t)[0] == smallerEmpId &&
+                                employeesPairsWorkdays.ElementAt(t)[1] == biggerEmpId)
+                            {
+                                employeesPairsWorkdays.ElementAt(t)[2] += daysWorkedTogether;
+                                currentPairIndex = t;
+                                break;
+                            }
+                        }
+
+                        for (int r = 0; r < EmployeesPairsAndProjectIds.Count; r++)
+                        {
+                            if (EmployeesPairsAndProjectIds.ElementAt(r).Key[0] == smallerEmpId &&
+                                EmployeesPairsAndProjectIds.ElementAt(r).Key[1] == biggerEmpId)
+                            {
+                                EmployeesPairsAndProjectIds.ElementAt(r).Value.Add(employeesWorkInfo.ElementAt(i).Key);
+                                break;
+                            }
+                        }
+
+                        if (employeesPairsWorkdays.ElementAt(currentPairIndex)[2] > maxDaysTwoEmployeesHaveWorkedOnTheSameProject)
+                        {
+                            maxDaysTwoEmployeesHaveWorkedOnTheSameProject = employeesPairsWorkdays.ElementAt(currentPairIndex)[2];
                             firstEmployeeID = currentProjectEmployeesWorkInfo.ElementAt(j).Key;
                             secondEmployeeID = currentProjectEmployeesWorkInfo.ElementAt(k).Key;
-                            projectIDOnWhichTheTwoEmployeesHaveWorkedOnTheMost = employeesWorkInfo.ElementAt(i).Key;
-
+                            
                             MaxDays = maxDaysTwoEmployeesHaveWorkedOnTheSameProject;
                             FirstEmpID = firstEmployeeID;
                             SecondEmpID = secondEmployeeID;
-                            ProjectID = projectIDOnWhichTheTwoEmployeesHaveWorkedOnTheMost;
+                            EmployeesPairWhoWorkedTheMostTogetherIndex = currentPairIndex;
                         }
                     }
                 }

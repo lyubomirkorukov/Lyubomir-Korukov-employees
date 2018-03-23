@@ -33,14 +33,20 @@ namespace LongestPeriodWithUI
 
             dataTable.Columns.Add("Employeed ID #1");
             dataTable.Columns.Add("Employeed ID #2");
-            dataTable.Columns.Add("Project ID");
+            dataTable.Columns.Add("Project IDs");
             dataTable.Columns.Add("Days worked");
             
             dataGridView1.DataSource = dataTable;
 
+            StringBuilder projectIDs = new StringBuilder();
+            for (int i = 0; i < LongestPeriod.EmployeesPairsAndProjectIds.ElementAt(LongestPeriod.EmployeesPairWhoWorkedTheMostTogetherIndex).Value.Count; i++)
+            {
+                projectIDs.Append(LongestPeriod.EmployeesPairsAndProjectIds.ElementAt(LongestPeriod.EmployeesPairWhoWorkedTheMostTogetherIndex).Value.ElementAt(i) + " ");
+            }
+
             dataTable.Rows.Add(new object[] { LongestPeriod.FirstEmpID,
                 LongestPeriod.SecondEmpID,
-                LongestPeriod.ProjectID,
+                projectIDs,
                 LongestPeriod.MaxDays});
         }
     }
